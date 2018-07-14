@@ -1,30 +1,12 @@
-const express = require("express");
-const utils = require("./controllers/utils");
-const app = express();
+// load the http module
+var http = require('http');
 
-const envOne = process.env.VARIABLE_1;
-const envTwo = process.env.VARIABLE_2;
-
-app.get("/", function(req, res) {
-  res.send("Hello World!");
+// configure our HTTP server
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World!");
 });
 
-app.get("/add", function(req, res) {
-  res.send(utils.add(envOne, envTwo));
-});
-
-app.get("/divide", function(req, res) {
-  res.send(utils.divide(envOne, envTwo));
-});
-
-app.get("/multiply", function(req, res) {
-  res.send(utils.multiply(envOne, envTwo));
-});
-
-app.get("/subtract", function(req, res) {
-  res.send(utils.subtract(envOne, envTwo));
-});
-
-app.listen(3000, function() {
-  console.log("Example app listening on port 3000!");
-});
+// listen on localhost:3000
+server.listen(3000);
+console.log("Server listening at http://127.0.0.1:3000/");
